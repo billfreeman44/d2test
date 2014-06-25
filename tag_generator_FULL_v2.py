@@ -33,7 +33,7 @@ def maketags(textin,textout,otherout):
 
     tagmothers = []
     tagsNoDuplicates = []
-
+    #TODO: Consider things after "\\" a comment
     for line in f:
         #parse line into things with quotes
         parsed=line.split('"')

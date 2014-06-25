@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="js_tags_small_abilities.js"></script>
+<script src="js_tags_small_heroes.js"></script>
+<script src="js_tags_small_items.js"></script>
+
+<script>
+function checkField(val)
+{
+
+
+document.getElementById("demo").innerHTML = val;
+
+words=val.split(" ")
+tags=tags_small_heroes
+tags=tags.concat(tags_small_abilities)
+tags=tags.concat(tags_small_items)
+
+// tags=tags.toLowerCase() //DOESN'T WORK??
+outtags=[]
+goodtags=[]
+possibletags=[]
+
+// loop through each word
+for (i=0; i < words.length; i++){
+//look for a possible tag
+result=words[i].search("@");
+//check if tag at beginning of word
+if (result == 0){
+//extract the possible tag
+wl = words[i].length
+output=words[i].slice(1,wl)
+
+
+//push to "all tags"
+outtags.push(output)
+
+//if a tag is in the tag list, then add to total tags list 
+if (tags.indexOf(output) > 0 ){
+goodtags.push(output)
+} else if (output.length > 1) {
+//loop through tags and search
+for (j=0; j < tags.length; j++){
+index=tags[j].indexOf(output)
+if (index > -1) {possibletags.push(tags[j]+"<br>")}
+} // end for loop through possible tags
+} // end else
+} // end for loop through all words
+} // end function checkField
+
+document.getElementById("demo").innerHTML = outtags;
+document.getElementById("demo2").innerHTML = goodtags;
+document.getElementById("demo3").innerHTML = possibletags;
+
+
+}
+</script>
+</head>
+<body>
+
+
+
+<textarea rows="4" cols="100" type="text"  name="txt" value="Hello" oninput="checkField(this.value)"></textarea>
+<br>all tags<br>
+<p id='demo'></p>
+
+<br>good tags<br>
+<p id='demo2'></p>
+<br>possible tags<br>
+<p id='demo3'></p>
+
+</body>
+</html>
